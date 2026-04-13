@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BuisWerk Voorbeeld — Loodgieter Amsterdam</title>
+  <meta name="description" content="BuisWerk Voorbeeld is uw vakkundige loodgieter in Amsterdam. Van lekkage opsporing tot badkamer renovatie — 24/7 spoedservice beschikbaar.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/iconify-icon@1.0.8/dist/iconify-icon.min.js"></script>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ========== HEADER ========== -->
+  <header class="header" id="header">
+    <a href="index.html" class="header__logo">
+      <span class="header__logo-mark">BW</span>
+      <span class="header__logo-text">BuisWerk</span>
+    </a>
+    <nav class="header__nav" id="mainNav">
+      <a href="#diensten">Diensten</a>
+      <a href="#over">Over ons</a>
+      <a href="#projecten">Projecten</a>
+      <a href="#faq">FAQ</a>
+      <a href="#contact" class="header__nav-cta">Bel direct</a>
+    </nav>
+    <button class="header__burger" id="burger" aria-label="Menu openen">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
+
+  <!-- ========== MOBILE MENU ========== -->
+  <div class="mobile-menu" id="mobileMenu">
+    <nav class="mobile-menu__nav">
+      <a href="#diensten">Diensten</a>
+      <a href="#over">Over ons</a>
+      <a href="#projecten">Projecten</a>
+      <a href="#faq">FAQ</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+
+  <!-- ========== HERO ========== -->
+  <section class="hero">
+    <div class="hero__bg">
+      <img src="images/hero.jpg" alt="Loodgieter aan het werk in Amsterdam" class="hero__bg-img">
+      <div class="hero__bg-overlay"></div>
+    </div>
+    <div class="hero__content">
+      <span class="hero__tag">Loodgieter Amsterdam</span>
+      <h1 class="hero__title">Vakmanschap<br>in elk <em>buiswerk</em></h1>
+      <p class="hero__subtitle">Van spoedlekkage tot complete badkamerrenovatie. BuisWerk Voorbeeld staat 24/7 voor u klaar met transparante prijzen en jarenlange ervaring.</p>
+      <div class="hero__actions">
+        <a href="tel:+31201234567" class="btn btn--primary">
+          <iconify-icon icon="lucide:phone"></iconify-icon>
+          020 - 123 4567
+        </a>
+        <a href="#diensten" class="btn btn--outline">Onze diensten</a>
+      </div>
+    </div>
+    <div class="hero__scroll-hint">
+      <span>Scroll</span>
+      <div class="hero__scroll-line"></div>
+    </div>
+  </section>
+  <div class="ticker" style="background:var(--color-accent,#f5a623);padding:12px 0;overflow:hidden;">
+    <div style="display:flex;gap:48px;animation:tickerScroll 20s linear infinite;white-space:nowrap;">
+      <span><iconify-icon icon="lucide:droplets"></iconify-icon> Lekkage</span><span><iconify-icon icon="lucide:thermometer"></iconify-icon> CV-ketel</span><span><iconify-icon icon="lucide:bath"></iconify-icon> Badkamer</span><span><iconify-icon icon="lucide:alert-triangle"></iconify-icon> Riool</span><span><iconify-icon icon="lucide:droplets"></iconify-icon> Waterleiding</span><span><iconify-icon icon="lucide:phone"></iconify-icon> 24/7 Spoed</span><span><iconify-icon icon="lucide:droplets"></iconify-icon> Lekkage</span><span><iconify-icon icon="lucide:thermometer"></iconify-icon> CV-ketel</span><span><iconify-icon icon="lucide:bath"></iconify-icon> Badkamer</span><span><iconify-icon icon="lucide:alert-triangle"></iconify-icon> Riool</span><span><iconify-icon icon="lucide:droplets"></iconify-icon> Waterleiding</span><span><iconify-icon icon="lucide:phone"></iconify-icon> 24/7 Spoed</span>
+    </div>
+  </div>
+  <style>@keyframes tickerScroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}</style>
+  <style>.ticker span{display:inline-flex;align-items:center;gap:8px;font-size:0.85rem;font-weight:700;color:var(--color-bg,#0a0a0f);text-transform:uppercase;letter-spacing:0.05em;}</style>
+
+
+  <!-- ========== SCROLL VIDEO (Canvas Frame Animation) ========== -->
+  <section class="scroll-video">
+    <div class="scroll-video__container">
+      <canvas class="scroll-video__canvas" id="scrollCanvas"></canvas>
+      <div class="scroll-video__overlay" id="scrollOverlay">
+        <span class="scroll-video__tag">Scroll om te zien</span>
+        <h2 class="scroll-video__title">Van lekkage<br>naar <em>waterdicht</em></h2>
+      </div>
+    </div>
+  </section>
+
+  
+  <!-- ======================== BEFORE / AFTER ======================== -->
+  <section class="ba-section" style="height:100vh;position:relative;overflow:hidden;background:#000;">
+    <div style="width:100%;height:100%;position:relative;">
+      <img src="images/craft.jpg" alt="Na" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1;">
+      <img src="images/hero.jpg" alt="Voor" id="baBefore" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:2;">
+      <div id="baLabel" style="position:absolute;z-index:3;bottom:10%;left:50%;transform:translateX(-50%);text-align:center;opacity:0;">
+        <span style="display:inline-block;background:var(--color-accent,#C1FF72);color:#0a0a0a;padding:8px 20px;border-radius:99px;font-size:0.75rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:16px;">Scroll om te zien</span>
+        <h2 style="font-size:clamp(2rem,5vw,3.5rem);font-weight:900;line-height:1.15;color:#fff;text-shadow:0 4px 20px rgba(0,0,0,0.6);">Van oud naar <em style="color:var(--color-accent,#C1FF72);">nieuw</em></h2>
+      </div>
+    </div>
+  </section>
+<!-- ========== SERVICES ========== -->
+  <section class="services" id="diensten">
+    <div class="services__header">
+      <span class="section-tag">Wat wij doen</span>
+      <h2 class="section-title">Onze <em>diensten</em></h2>
+    </div>
+    <div class="services__grid">
+      <div class="service-card">
+        <div class="service-card__icon">
+          <iconify-icon icon="lucide:search"></iconify-icon>
+        </div>
+        <h3 class="service-card__title">Lekkage opsporing</h3>
+        <p class="service-card__desc">Met thermische camera's en vochtmeters sporen wij elke lekkage op — ook achter muren en onder vloeren. Geen onnodige breekwerk.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-card__icon">
+          <iconify-icon icon="lucide:thermometer"></iconify-icon>
+        </div>
+        <h3 class="service-card__title">CV-ketel</h3>
+        <p class="service-card__desc">Installatie, onderhoud en reparatie van alle merken CV-ketels. Storing? Dezelfde dag nog verholpen door onze monteurs.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-card__icon">
+          <iconify-icon icon="lucide:bath"></iconify-icon>
+        </div>
+        <h3 class="service-card__title">Badkamer renovatie</h3>
+        <p class="service-card__desc">Van ontwerp tot oplevering. Complete badkamerrenovaties met oog voor detail — tegels, sanitair, leidingwerk en afwerking.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-card__icon">
+          <iconify-icon icon="lucide:alert-triangle"></iconify-icon>
+        </div>
+        <h3 class="service-card__title">Riool ontstopping</h3>
+        <p class="service-card__desc">Verstopt riool of afvoer? Onze monteurs komen met professionele doorspuitapparatuur en camera-inspectie. 24/7 beschikbaar.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-card__icon">
+          <iconify-icon icon="lucide:droplets"></iconify-icon>
+        </div>
+        <h3 class="service-card__title">Waterleiding</h3>
+        <p class="service-card__desc">Aanleg, vervanging en reparatie van waterleidingen. Wij werken met hoogwaardige materialen voor een jarenlange garantie.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-card__icon">
+          <iconify-icon icon="lucide:phone"></iconify-icon>
+        </div>
+        <h3 class="service-card__title">24/7 spoed</h3>
+        <p class="service-card__desc">Wateroverlast wacht niet. Onze spoeddienst is dag en nacht bereikbaar — binnen 45 minuten ter plaatse in Amsterdam.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== STATS ========== -->
+  <section class="stats">
+    <div class="stats__inner">
+      <div class="stats__item">
+        <span class="stats__number" data-count="3200">0</span>
+        <span class="stats__label">Klussen voltooid</span>
+      </div>
+      <div class="stats__divider"></div>
+      <div class="stats__item">
+        <span class="stats__number" data-count="15">0</span>
+        <span class="stats__label">Jaar ervaring</span>
+      </div>
+      <div class="stats__divider"></div>
+      <div class="stats__item">
+        <span class="stats__number" data-count="12">0</span>
+        <span class="stats__label">Vakbekwame monteurs</span>
+      </div>
+      <div class="stats__divider"></div>
+      <div class="stats__item">
+        <span class="stats__number" data-count="45">0</span>
+        <span class="stats__label">Min. reactietijd</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== SPLIT IMAGE + TEXT ========== -->
+  <section class="split" id="over">
+    <div class="split__image">
+      <img src="images/craft.jpg" alt="Vakkundige loodgieter soldeert koperen leiding" loading="lazy">
+    </div>
+    <div class="split__content">
+      <span class="section-tag">Over BuisWerk</span>
+      <h2 class="section-title">Ambacht ontmoet <em>technologie</em></h2>
+      <p>Al meer dan 15 jaar is BuisWerk Voorbeeld de vertrouwde loodgieter van Amsterdam. Ons team combineert traditioneel vakmanschap met de nieuwste detectie- en installatietechnieken.</p>
+      <p>Wij geloven in transparantie: u krijgt altijd een vaste prijs vooraf, zonder verrassingen achteraf. Van een druppelende kraan tot een volledige badkamerrenovatie — wij leveren kwaliteit waar u op kunt bouwen.</p>
+      <ul class="split__list">
+        <li><iconify-icon icon="lucide:check-circle"></iconify-icon> Vaste prijzen, geen verrassingen</li>
+        <li><iconify-icon icon="lucide:check-circle"></iconify-icon> 24/7 spoedservice beschikbaar</li>
+        <li><iconify-icon icon="lucide:check-circle"></iconify-icon> Gecertificeerde monteurs</li>
+        <li><iconify-icon icon="lucide:check-circle"></iconify-icon> Garantie op al ons werk</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ========== GALLERY ========== -->
+  <section class="gallery" id="projecten">
+    <div class="gallery__header">
+      <span class="section-tag">Recente projecten</span>
+      <h2 class="section-title">Ons <em>werk</em></h2>
+    </div>
+    <div class="gallery__grid">
+      <div class="gallery__item gallery__item--wide">
+        <img src="images/project1.jpg" alt="Badkamer renovatie Amsterdam-Zuid" loading="lazy">
+        <div class="gallery__caption">
+          <span class="gallery__caption-title">Badkamer renovatie</span>
+          <span class="gallery__caption-loc">Amsterdam-Zuid</span>
+        </div>
+      </div>
+      <div class="gallery__item">
+        <img src="images/project2.jpg" alt="Lekkage reparatie grachtenpand" loading="lazy">
+        <div class="gallery__caption">
+          <span class="gallery__caption-title">Lekkage reparatie</span>
+          <span class="gallery__caption-loc">Grachtenpand</span>
+        </div>
+      </div>
+      <div class="gallery__item">
+        <img src="images/kitchen.jpg" alt="Keuken leidingwerk Amstelveen" loading="lazy">
+        <div class="gallery__caption">
+          <span class="gallery__caption-title">Keuken leidingwerk</span>
+          <span class="gallery__caption-loc">Amstelveen</span>
+        </div>
+      </div>
+      <div class="gallery__item">
+        <img src="images/detail.jpg" alt="Detailwerk koperen leidingen" loading="lazy">
+        <div class="gallery__caption">
+          <span class="gallery__caption-title">Koperen leidingen</span>
+          <span class="gallery__caption-loc">Amsterdam-Centrum</span>
+        </div>
+      </div>
+      <div class="gallery__item gallery__item--wide">
+        <img src="images/carousel.jpg" alt="CV-ketel installatie Utrecht" loading="lazy">
+        <div class="gallery__caption">
+          <span class="gallery__caption-title">CV-ketel installatie</span>
+          <span class="gallery__caption-loc">Utrecht</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== FAQ ========== -->
+  <section class="faq" id="faq">
+    <div class="faq__header">
+      <span class="section-tag">Veelgestelde vragen</span>
+      <h2 class="section-title">Alles wat u wilt <em>weten</em></h2>
+    </div>
+    <div class="faq__list">
+      <details class="faq__item">
+        <summary class="faq__question">
+          Hoe snel kunnen jullie er zijn bij een spoedgeval?
+          <iconify-icon icon="lucide:chevron-down" class="faq__chevron"></iconify-icon>
+        </summary>
+        <div class="faq__answer">
+          <p>Bij een spoedgeval zijn wij binnen 45 minuten ter plaatse in Amsterdam en omgeving. Onze spoeddienst is 24 uur per dag, 7 dagen per week bereikbaar.</p>
+        </div>
+      </details>
+      <details class="faq__item">
+        <summary class="faq__question">
+          Werken jullie met vaste prijzen?
+          <iconify-icon icon="lucide:chevron-down" class="faq__chevron"></iconify-icon>
+        </summary>
+        <div class="faq__answer">
+          <p>Ja, wij geven altijd een vaste prijs vooraf. Na inspectie van het probleem ontvangt u een duidelijke offerte. Geen verrassingen achteraf.</p>
+        </div>
+      </details>
+      <details class="faq__item">
+        <summary class="faq__question">
+          Zijn jullie monteurs gecertificeerd?
+          <iconify-icon icon="lucide:chevron-down" class="faq__chevron"></iconify-icon>
+        </summary>
+        <div class="faq__answer">
+          <p>Al onze monteurs zijn volledig gecertificeerd en volgen regelmatig bijscholing. Wij zijn aangesloten bij erkende brancheorganisaties.</p>
+        </div>
+      </details>
+      <details class="faq__item">
+        <summary class="faq__question">
+          Wat kost een lekkage opsporing?
+          <iconify-icon icon="lucide:chevron-down" class="faq__chevron"></iconify-icon>
+        </summary>
+        <div class="faq__answer">
+          <p>De kosten van een lekkage opsporing hangen af van de complexiteit. Neem contact op voor een vrijblijvende prijsindicatie. Wij werken altijd met een vaste prijs na inspectie.</p>
+        </div>
+      </details>
+      <details class="faq__item">
+        <summary class="faq__question">
+          Geven jullie garantie op het werk?
+          <iconify-icon icon="lucide:chevron-down" class="faq__chevron"></iconify-icon>
+        </summary>
+        <div class="faq__answer">
+          <p>Ja, op al ons werk geven wij minimaal 2 jaar garantie. Bij grotere renovaties geldt een uitgebreide garantieregeling die wij vooraf met u bespreken.</p>
+        </div>
+      </details>
+      <details class="faq__item">
+        <summary class="faq__question">
+          In welke regio zijn jullie actief?
+          <iconify-icon icon="lucide:chevron-down" class="faq__chevron"></iconify-icon>
+        </summary>
+        <div class="faq__answer">
+          <p>Wij zijn actief in heel Amsterdam en omstreken, waaronder Amstelveen, Diemen, Zaandam en Haarlem. Voor spoedgevallen komen wij in de hele Randstad.</p>
+        </div>
+      </details>
+    </div>
+  </section>
+
+  <!-- ========== CTA ========== -->
+  <section class="cta" id="contact">
+    <div class="cta__bg">
+      <img src="images/cta-bg.jpg" alt="Loodgieter werkplaats" loading="lazy">
+      <div class="cta__bg-overlay"></div>
+    </div>
+    <div class="cta__content">
+      <span class="section-tag section-tag--light">Neem contact op</span>
+      <h2 class="cta__title">Waterprobleem?<br>Wij lossen het <em>op.</em></h2>
+      <p class="cta__subtitle">Bel ons direct of vraag een vrijblijvende offerte aan. Wij reageren binnen 30 minuten.</p>
+      <div class="cta__actions">
+        <a href="tel:+31201234567" class="btn btn--primary btn--large">
+          <iconify-icon icon="lucide:phone"></iconify-icon>
+          020 - 123 4567
+        </a>
+        <a href="mailto:info@buiswerk-voorbeeld.nl" class="btn btn--outline btn--light">
+          <iconify-icon icon="lucide:mail"></iconify-icon>
+          E-mail ons
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="footer">
+    <div class="footer__top">
+      <div class="footer__brand">
+        <span class="footer__logo-mark">BW</span>
+        <span class="footer__logo-text">BuisWerk Voorbeeld</span>
+        <p class="footer__tagline">Vakkundige loodgieter in Amsterdam. Al meer dan 15 jaar uw partner voor alles rondom water en verwarming.</p>
+      </div>
+      <div class="footer__links">
+        <h4>Diensten</h4>
+        <a href="#diensten">Lekkage opsporing</a>
+        <a href="#diensten">CV-ketel service</a>
+        <a href="#diensten">Badkamer renovatie</a>
+        <a href="#diensten">Riool ontstopping</a>
+      </div>
+      <div class="footer__links">
+        <h4>Contact</h4>
+        <a href="tel:+31201234567">020 - 123 4567</a>
+        <a href="mailto:info@buiswerk-voorbeeld.nl">info@buiswerk-voorbeeld.nl</a>
+        <p>Prinsengracht 100<br>1015 DX Amsterdam</p>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>&copy; 2026 BuisWerk Voorbeeld. Alle rechten voorbehouden.</span>
+      <div class="footer__bottom-links">
+        <a href="#">Privacy</a>
+        <a href="#">Voorwaarden</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- StudioLee Badge -->
+  <a href="https://www.studiolee.nl" target="_blank" rel="nofollow noopener" class="studiolee-badge">
+    Speciaal gemaakt voor loodgieters door StudioLee.nl &nearr;
+  </a>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/ScrollTrigger.min.js"></script>
+  <script>
+    /* ============================================================
+       BuisWerk Freestyle 1 — JavaScript
+       ============================================================ */
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    /* ---------- HEADER SCROLL ---------- */
+    const header = document.getElementById('header');
+    let lastScroll = 0;
+    window.addEventListener('scroll', () => {
+      const current = window.scrollY;
+      if (current > 80) {
+        header.classList.add('header--scrolled');
+      } else {
+        header.classList.remove('header--scrolled');
+      }
+      if (current > lastScroll && current > 400) {
+        header.classList.add('header--hidden');
+      } else {
+        header.classList.remove('header--hidden');
+      }
+      lastScroll = current;
+    });
+
+    /* ---------- MOBILE MENU ---------- */
+    const burger = document.getElementById('burger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    burger.addEventListener('click', () => {
+      burger.classList.toggle('is-active');
+      mobileMenu.classList.toggle('is-open');
+      document.body.classList.toggle('no-scroll');
+    });
+    mobileMenu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        burger.classList.remove('is-active');
+        mobileMenu.classList.remove('is-open');
+        document.body.classList.remove('no-scroll');
+      });
+    });
+
+    /* ---------- SCROLL VIDEO (CANVAS FRAME ANIMATION) ---------- */
+    const canvas = document.getElementById('scrollCanvas');
+    const ctx = canvas.getContext('2d');
+    const overlay = document.getElementById('scrollOverlay');
+    const frameCount = 121;
+    const images = [];
+    let loadedCount = 0;
+
+    function framePath(index) {
+      const num = String(index).padStart(4, '0');
+      img.src = 'images/frames/frame-' + String(i).padStart(3, '0') + '.jpg';
+    }
+
+    function setCanvasSize() {
+      const dpr = window.devicePixelRatio || 1;
+      const rect = canvas.parentElement.getBoundingClientRect();
+      canvas.width = rect.width * dpr;
+      canvas.height = rect.height * dpr;
+      canvas.style.width = rect.width + 'px';
+      canvas.style.height = rect.height + 'px';
+      ctx.scale(dpr, dpr);
+    }
+
+    function drawFrame(index) {
+      if (!images[index] || !images[index].complete) return;
+      const img = images[index];
+      const rect = canvas.parentElement.getBoundingClientRect();
+      const canvasW = rect.width;
+      const canvasH = rect.height;
+
+      // Cover fit
+      const imgRatio = img.naturalWidth / img.naturalHeight;
+      const canvasRatio = canvasW / canvasH;
+      let drawW, drawH, drawX, drawY;
+      if (canvasRatio > imgRatio) {
+        drawW = canvasW;
+        drawH = canvasW / imgRatio;
+        drawX = 0;
+        drawY = (canvasH - drawH) / 2;
+      } else {
+        drawH = canvasH;
+        drawW = canvasH * imgRatio;
+        drawX = (canvasW - drawW) / 2;
+        drawY = 0;
+      }
+
+      ctx.clearRect(0, 0, canvasW, canvasH);
+      ctx.drawImage(img, drawX, drawY, drawW, drawH);
+    }
+
+    // Preload all frames
+    for (let i = 0; i < frameCount; i++) {
+      const img = new Image();
+      img.src = framePath(i);
+      img.onload = () => {
+        loadedCount++;
+        if (loadedCount === 1) {
+          setCanvasSize();
+          drawFrame(0);
+        }
+      };
+      images[i] = img;
+    }
+
+    // If no frames load (missing images), show fallback
+    setTimeout(() => {
+      if (loadedCount === 0) {
+        // Draw gradient fallback
+        setCanvasSize();
+        const rect = canvas.parentElement.getBoundingClientRect();
+        const gradient = ctx.createLinearGradient(0, 0, 0, rect.height);
+        gradient.addColorStop(0, '#0a1628');
+        gradient.addColorStop(1, '#1a2a4a');
+        ctx.fillStyle = gradient;
+        ctx.fillRect(0, 0, rect.width, rect.height);
+      }
+    }, 2000);
+
+    window.addEventListener('resize', () => {
+      setCanvasSize();
+      drawFrame(currentFrameIndex || 0);
+    });
+
+    let currentFrameIndex = 0;
+    const scrollVideoObj = { frame: 0 };
+
+    gsap.to(scrollVideoObj, {
+      frame: frameCount - 1,
+      
+      ease: 'none',
+      scrollTrigger: {
+        trigger: '.scroll-video',
+        start: 'top top',
+        end: '+=600%',
+        pin: true,
+        scrub: 0.3,
+        onUpdate: (self) => {
+          const index = Math.round(scrollVideoObj.frame);
+          if (index !== currentFrameIndex) {
+            currentFrameIndex = index;
+            drawFrame(index);
+          }
+          // Fade overlay based on progress
+          const progress = self.progress;
+          if (progress < 0.15) {
+            overlay.style.opacity = 1;
+          } else if (progress < 0.35) {
+            overlay.style.opacity = 1 - ((progress - 0.15) / 0.2);
+          } else {
+            overlay.style.opacity = 0;
+          }
+        }
+      }
+    });
+
+    /* ---------- STATS COUNTER ---------- */
+    document.querySelectorAll('.stats__number').forEach(el => {
+      const target = parseInt(el.dataset.count);
+      const obj = { val: 0 };
+      gsap.to(obj, {
+        val: target,
+        duration: 2,
+        ease: 'power2.out',
+        scrollTrigger: {
+          trigger: el,
+          start: 'top 85%',
+          once: true
+        },
+        onUpdate: () => {
+          el.textContent = Math.round(obj.val).toLocaleString('nl-NL');
+        }
+      });
+    });
+
+    /* ---------- SECTION REVEAL ANIMATIONS ---------- */
+    gsap.utils.toArray('.service-card').forEach((card, i) => {
+      gsap.from(card, {
+        y: 60,
+        opacity: 0,
+        duration: 0.8,
+        delay: i * 0.1,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: card,
+          start: 'top 88%',
+          once: true
+        }
+      });
+    });
+
+    gsap.utils.toArray('.gallery__item').forEach((item, i) => {
+      gsap.from(item, {
+        y: 80,
+        opacity: 0,
+        duration: 0.9,
+        delay: i * 0.12,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: item,
+          start: 'top 90%',
+          once: true
+        }
+      });
+    });
+
+    gsap.utils.toArray('.faq__item').forEach((item, i) => {
+      gsap.from(item, {
+        x: -40,
+        opacity: 0,
+        duration: 0.7,
+        delay: i * 0.08,
+        ease: 'power2.out',
+        scrollTrigger: {
+          trigger: item,
+          start: 'top 90%',
+          once: true
+        }
+      });
+    });
+
+    /* Split section parallax */
+    gsap.from('.split__image img', {
+      yPercent: 15,
+      ease: 'none',
+      scrollTrigger: {
+        trigger: '.split',
+        start: 'top bottom',
+        end: 'bottom top',
+        scrub: true
+      }
+    });
+
+    /* Hero parallax */
+    gsap.to('.hero__bg-img', {
+      yPercent: 20,
+      ease: 'none',
+      scrollTrigger: {
+        trigger: '.hero',
+        start: 'top top',
+        end: 'bottom top',
+        scrub: true
+      }
+    });
+
+    /* ---------- FAQ ACCORDION ---------- */
+    document.querySelectorAll('.faq__item').forEach(item => {
+      item.addEventListener('toggle', () => {
+        if (item.open) {
+          document.querySelectorAll('.faq__item').forEach(other => {
+            if (other !== item) other.removeAttribute('open');
+          });
+        }
+      });
+    });
+
+    /* ---------- SMOOTH SCROLL ---------- */
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+  </script>
+
+
+    // Before/After slider
+    (function() {
+      var before = document.getElementById('baBefore');
+      var label = document.getElementById('baLabel');
+      if (!before || typeof gsap === 'undefined') return;
+      gsap.registerPlugin(ScrollTrigger);
+      var tl = gsap.timeline({
+        scrollTrigger: { trigger: '.ba-section', start: 'top top', end: '+=200%', pin: true, scrub: 0.5, anticipatePin: 1 }
+      });
+      tl.fromTo(before, { clipPath: 'inset(0 0 0 0)' }, { clipPath: 'inset(0 100% 0 0)', duration: 1, ease: 'none' });
+      tl.fromTo(label, { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.4, ease: 'power2.out' }, 0.5);
+    })();
+
+</body>
+</html>
